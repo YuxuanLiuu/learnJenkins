@@ -8,8 +8,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "echo haha"
+                sh "cd wordladder-oauth-consumer && mvn -B -DskipTests clean package"
+		sh "cd wordladder-oauth-server && mvn -B -DskipTests clean package"
             }
         }
+	stage('Test') {
+            steps {
+                sh "cd wordladder-oauth-consumer && mvn test"
+            }
+        }
+	
     }
 }
